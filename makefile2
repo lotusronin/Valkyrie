@@ -1,0 +1,25 @@
+VER=Valkyrie0.2
+CC=g++
+CFLAGS=-c -g -Wall
+GTK=`pkg-config --cflags --libs gtkmm-3.0`
+
+$(VER): main2.o win.o iconview.o pane.o modelcolumn.o
+	$(CC) main2.o win.o iconview.o pane.o modelcolumn.o -o $(VER) $(GTK)
+
+main2.o : main2.cpp
+	$(CC) $(CFLAGS) main2.cpp $(GTK)
+
+win.o : win.cpp
+	$(CC) $(CFLAGS) win.cpp $(GTK)
+iconview.o : iconview.cpp
+	$(CC) $(CFLAGS) iconview.cpp $(GTK)
+
+pane.o : pane.cpp
+	$(CC) $(CFLAGS) pane.cpp $(GTK)
+
+modelcolumn.o : modelcolumn.cpp
+	$(CC) $(CFLAGS) modelcolumn.cpp $(GTK)
+
+clean : $@
+	rm -f win.o main2.o iconview.o pane.o
+	echo clean done
